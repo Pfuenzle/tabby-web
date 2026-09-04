@@ -63,4 +63,9 @@ class Command(BaseCommand):
             if fs.exists(target):
                 fs.rm(target, recursive=True)
             fs.mkdir(target)
-            fs.put(str(tempdir), target, recursive=True)
+            for plugin_final_target in tempdir.iterdir():
+                fs.put(
+                    str(plugin_final_target),
+                    f"{target}/{plugin_final_target.name}",
+                    recursive=True,
+                )
